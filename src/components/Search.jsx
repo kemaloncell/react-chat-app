@@ -2,8 +2,16 @@ import React from "react";
 
 const Search = () => {
     return(
-        <div className="">
-            Search
+        <div className="search">
+            <div className="searchForm">
+                <input type="text" placeholder="find a user"/>
+            </div>
+            <div className="userChat">
+                    <img src="../img/man.jpg" alt=""/>
+                <div className="userChatInfo">
+                    <span className="">Kemal</span>
+                </div>
+            </div>
         </div>
     )
 }

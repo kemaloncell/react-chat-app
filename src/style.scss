@@ -68,7 +68,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
+
 
 .container{
     border: 1px solid white;
@@ -77,7 +77,7 @@
     height: 80%;
     display: flex;
     overflow: hidden;
-}
+
 .sidebar{
     flex:1;
     background-color: #3e3c61;
@@ -111,8 +111,45 @@
             }
         }
     }
+    .search{
+        border-bottom: 1px solid gray;
+
+        .searchForm{
+            padding: 10px;
+            input{
+            background-color: transparent;
+                border: none;
+                color: white;
+                outline: none;
+
+                &::placeholder{
+                    color: lightgray;
+                }
+            }
+        }
+        .userChat{
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap:10px;
+            color: white;
+            cursor: pointer;
+
+            &:hover{
+                background-color: #2f2d52;
+            }
+            img{
+                width:50px;
+                height:50px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+    }
 }
-.chat{
+    .chat{
     // this is twice bigger as the sidebar
-  flex:2;
+    flex:2;
+   }
+  }
 }
