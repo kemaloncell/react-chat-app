@@ -5,7 +5,7 @@ const Navbar = () => {
         <div className="navbar">
             <span className="logo">Chat app</span>
             <div className="user">
-                <img src="../img/man2.jpg"  alt=""/>
+                <img src={require('../img/man2.jpg')}  alt=""/>
                 <span className="">Jhon</span>
                 <button>logout</button>
             </div>
