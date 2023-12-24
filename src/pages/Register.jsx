@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { auth, storage, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 const Register = () => {
     const [error, setError] = useState(false)
     const navigate = useNavigate()
@@ -25,11 +25,13 @@ const Register = () => {
                     setError(true)
                 },
                 () => {
-                    getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-                        await updateProfile(res.user, {
+                    // authentication process
+                    getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => { // when upload the image it returns its downland url
+                        await updateProfile(res.user, { // it updates the users name and photo url
                             displayName,
                             photoURL: downloadURL
                         });
+                        // insert the user to the firebase database
                         await setDoc(doc(db, 'users', res.user.uid), {
                             uid: res.user.uid,
                             displayName,
@@ -66,7 +68,7 @@ const Register = () => {
                     <button>Sign Up</button>
                     {error && <span>Something went wrong</span>}
                 </form>
-                <p>Do you have an account? Login</p>
+                <p>Do you have an account? <Link to="/register">Login</Link></p>
             </div>
         </div>
     )

@@ -17,6 +17,8 @@ function App() {
         if(!currentUser){
             return <Navigate to="/login" />
         }
+
+        return children // if it currentUser return Home page
     }
 
   return (
