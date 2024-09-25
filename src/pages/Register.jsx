@@ -21,7 +21,7 @@ const Register = () => {
             const uploadTask = uploadBytesResumable(storageRef, file);
 
             uploadTask.on(
-                () => {
+                (error) => { // if there is any error
                     setError(true)
                 },
                 () => {
@@ -31,12 +31,13 @@ const Register = () => {
                             displayName,
                             photoURL: downloadURL
                         });
-                        // insert the user to the firebase database
+                        // add the user to the firebase database, so we can retrieve the user data when needed
                         await setDoc(doc(db, 'users', res.user.uid), {
                             uid: res.user.uid,
                             displayName,
                             email,
                             photoURL: downloadURL
+                            // we are not going to use password here that because we going to use that users collection to see other users
                         });
 
                         await setDoc(doc(db, 'userChats', res.user.uid),{}) // it collects users chats
@@ -68,7 +69,7 @@ const Register = () => {
                     <button>Sign Up</button>
                     {error && <span>Something went wrong</span>}
                 </form>
-                <p>Do you have an account? <Link to="/register">Login</Link></p>
+                <p>Do you have an account? <Link to="/login">Login</Link></p>
             </div>
         </div>
     )

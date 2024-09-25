@@ -15,6 +15,6 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth()
+export const auth = getAuth() // it stores all users information
 export const storage = getStorage();
 export const db = getFirestore()
