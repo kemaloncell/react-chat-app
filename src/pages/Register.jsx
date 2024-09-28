@@ -17,10 +17,16 @@ const Register = () => {
 
         try {
             const res = await createUserWithEmailAndPassword(auth, email, password)
-            const storageRef = ref(storage, displayName); // it will be added like this; kemal.jpg
+            const storageRef = ref(storage, `${res.user.uid}_avatar`); // it will be added like this; kemal.jpg
             const uploadTask = uploadBytesResumable(storageRef, file);
 
             uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    // Progress monitoring (isteğe bağlı, sadece bilgi amaçlı)
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                },
                 (error) => { // if there is any error
                     setError(true)
                 },
@@ -37,6 +43,7 @@ const Register = () => {
                             displayName,
                             email,
                             photoURL: downloadURL
+
                             // we are not going to use password here that because we going to use that users collection to see other users
                         });
 
